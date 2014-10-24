@@ -79,13 +79,10 @@ public class Topology {
 		builder.setSpout(KAFKA_SPOUT_ID, kafkaSpout);
 			
 		builder.setBolt(TUPLETRANSFORMER_BOLT_ID, tt).shuffleGrouping(KAFKA_SPOUT_ID);
-
 		
-		//builder.setBolt(INDEXSOLR_BOLT_ID, index).shuffleGrouping(TUPLETRANSFORMER_BOLT_ID);
-
+		builder.setBolt(INDEXSOLR_BOLT_ID, index).shuffleGrouping(TUPLETRANSFORMER_BOLT_ID);
 		builder.setBolt(HBASE_SHORTTERM_BOLT_ID, ohbolt).shuffleGrouping(TUPLETRANSFORMER_BOLT_ID);
-		builder.setBolt(HBASE_LONGTERM_BOLT_ID, ohboltl).shuffleGrouping(TUPLETRANSFORMER_BOLT_ID);
-		
+		builder.setBolt(HBASE_LONGTERM_BOLT_ID, ohboltl).shuffleGrouping(TUPLETRANSFORMER_BOLT_ID);		
 		
 		Config config = new Config();
 		
